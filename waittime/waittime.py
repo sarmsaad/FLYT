@@ -6,8 +6,8 @@
 # 40% of the people do self check-in
 
 
-def calculate_checkin_time(airline, num_flights, num_seats):
-    total_people = num_flights * num_seats
+def calculate_checkin_time(airline, num_flights):
+    total_people = num_flights * 140
 
     if total_people < 100:
         wait_time = (0.40 * total_people * 3.0) / 9.0
@@ -24,7 +24,7 @@ def calculate_checkin_time(airline, num_flights, num_seats):
 # 45 seconds ON AVERAGE per person to get through security
 
 def calculate_security_time(tot_people):
-    wait_time = (0.50 * tot_people * 0.75) / 4.0
+    wait_time = (0.40 * tot_people * 0.75) / 4.0
 
     return wait_time
 
