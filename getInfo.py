@@ -9,6 +9,8 @@ APP_KEY_GOECODE = 'AIzaSyAWOFkVAIf0S3uUAQ6umYkwMprlQweag24'
 distanceMatrix_root = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&'
 geocode_root = 'https://maps.googleapis.com/maps/api/geocode/json?'
 
+users = []
+
 @app.route('/info', methods = ['POST'])
 def storeInfo():
     origin = request.form['address']
@@ -17,10 +19,49 @@ def storeInfo():
     flightTime = request.form['flight time']
     airport = request.form['destination']
     transport = request.form['transportation']
+    checkin = request.form['checkin']
+    person = user(phoneNumber, origin, flightNumber, flightTime, airport, transport, checkin)
+    ##check no duplicates
+    for i in users:
+        if phoneNumber == i.phone and flightTime == i.time and flightNumber == i.flight:
+            return
+    users.append(person)
+
+
 
 @app.route('/changeOri', methods = ['POST'])
-def changeOrigin(origin, destination, transport):
-    return getAverageTravalTime(origin, destination, transport)
+def changeOrigin():
+    origin = request.form['address']
+    phoneNumber = request.form['phone number']
+    ##here we search for the use that has the following phone number and change their origin so
+    ##we need to calculate their leaving time from their location has changed
+    for i in users:
+        if phoneNumber == i.phone:
+            i.changeDestination(origin)
+            return i.estimateTime
+    return "sorry didn't find the user"
+
+class user:
+    def __init__(self, phoneNumber, address, flightNumber, flightTime, airport, transport,  checkin):
+        self.phone = phoneNumber
+        self.address = address
+        self.flight = flightNumber
+        self.time = flightTime
+        self.aiport = airport
+        self.transport = transport
+        self.checkin = checkin
+        ##this is the most important variable
+        #needs more estimations to get an accurate leaving time
+        self.estimateTime = getAverageTravelTime(address, airport, transport)
+
+    def changeDestination(self, origin):
+        ##do somechanges.
+        self.estimateTime = self.estimateTime - getAverageTravelTime(self.address, self.airport, self.transport) + getAverageTravelTime(origin, self.airport, self.transport)
+        self.address = origin
+
+
+
+
 
 def getAverageTravelTime(origin, destination, transport):
     ##replace whitespace with '+' signs
@@ -46,6 +87,6 @@ def getAverageTravelTime(origin, destination, transport):
             return round(duration / (60.0),2)
 
 
-print(getAverageTravelTime('81 Bay State, Boston, MA', '726 Comm Ave, Boston, MA', 'bicycling'))
+print(getAverageTravelTime('81 Bay State, Boston, MA', '726 Comm Ave, Boston, MA', 'walking'))
 
 
