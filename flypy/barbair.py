@@ -90,7 +90,7 @@ def get_flights(airport, start_time):
     r = []
     for s in scheds:
         hour, minute = parse_time(s[3])
-        if hour == start_time.hour or (minute < start_time.minute):
+        if hour == start_time.hour or (minute < start_time.minute and hour <= start_time.hour):
             r.append(s)
         elif hour == start_time.hour + 1 and minute > start_time.minute:
             break
