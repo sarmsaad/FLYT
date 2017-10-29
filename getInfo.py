@@ -21,15 +21,16 @@ def storeInfo():
     phoneNumber = request.form['phone']
     flightNumber = request.form['flight number']
     flightTime = request.form['flight time']
+    departureDay = request.form['departureDay']
     airport = request.form['destination']
     transport = request.form['transportation']
     checkin = request.form['checkin']
-    person = user(phoneNumber, origin, flightNumber, flightTime, airport, transport, checkin)
+    person = user(phoneNumber, origin, flightNumber, flightTime, airport, transport, checkin, departureDay)
     ##check no duplicates
     for i in users:
         if phoneNumber == i.phone and flightTime == i.time and flightNumber == i.flight:
             return
-    users.append(person)
+    users.add_to_queue(person)
 
 
 
@@ -46,7 +47,7 @@ def changeOrigin():
     return "sorry didn't find the user"
 
 class user:
-    def __init__(self, phoneNumber, address, flightNumber, flightTime, airport, transport,  checkin):
+    def __init__(self, phoneNumber, address, flightNumber, flightTime, airport, transport,  checkin, depart):
         self.phone = phoneNumber
         self.address = address
         self.flight = flightNumber
@@ -57,6 +58,7 @@ class user:
         ##this is the most important variable
         #needs more estimations to get an accurate leaving time
         self.estimateTime = getAverageTravelTime(address, airport, transport)
+        self.departure = depart
 
     def changeDestination(self, origin):
         ##do somechanges.
