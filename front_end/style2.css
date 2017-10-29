@@ -1,0 +1,12 @@
+body{
+	font-family: "Lobster";
+	background: url(https://onewdesign.files.wordpress.com/2011/08/nichijou-20-plane.gif?w=950);
+	background-size: cover;
+}
+.jumbotron{
+	margin-top: 100px;
+	margin-right: 300px;
+	margin-left: 300px;
+	top:50%;
+
+}
