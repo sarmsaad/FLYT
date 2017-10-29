@@ -34,11 +34,13 @@
     </div>
 
     <?php
+
     $myObj->address = $_GET["addr"];
     $myObj->number = $_GET["num"];
     $myObj->trans = $_GET["transport"];
     $myObj->airport = $_GET["air"];
     $myObj->flightId = $_GET["flyid"];
+    $myObj->selfCheck = $_GET["#self"]
     $myObj->departTime = str_replace("T", " ", $_GET["departure"]);
 
     $myJSON = json_encode($myObj);

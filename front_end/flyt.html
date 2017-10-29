@@ -83,7 +83,7 @@
         <!--form for address-->
          <div class="form-row">
             <div class="col">
-                <label for = "address">Address of Departure</label>
+                <label for = "addr">Address of Departure</label>
                 <input type="text" class="form-control" name="addr" required>
             </div>
         </div>
@@ -91,19 +91,34 @@
         <!--form for phone and mode of transportation-->
         <div class="form-row">
             <div class="col-sm-6">
-                <label for = "number">Phone Number</label>
+                <label for = "num">Phone Number</label>
                 <input type="text" class="form-control" name="num" required>
             </div>
             
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for = "trans">Mode of Transportation</label>
-                    <select name="transport" class="form-control">
+                    <select name="trans" class="form-control">
                         <option selected>Choose...</option>
                         <option>Car</option>
                         <option>Walking</option>
                         <option>Public Transportation</option>
                     </select>
             </div> 
+            <div class="col-sm-2">
+                <label for = "self">Self Check-in?</label>
+                <div id   = "self">
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">Yes
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">No
+                      </label>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -111,7 +126,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="air">Airport</label>
-                <select name="airport" class="form-control">
+                <select name="air" class="form-control">
                         <option selected>Choose...</option>
                         <option>BOS</option>
                         <option>SFO</option>
@@ -126,6 +141,7 @@
               <label for="departure">Departure Time</label>
               <input type="datetime-local" class="form-control" name="departure">
             </div>
+
         </div>
 
         <div class="form-group row" align = "center">
