@@ -22,7 +22,7 @@
                 echo "Thank you for using Flyt";
             }
             else{
-                echo ("Thank you, ". $name ." for using Flyt");
+                echo ("Thank you ". $name ." for using Flyt");
             }
             ?>
         </h1>
