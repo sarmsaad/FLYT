@@ -1,6 +1,7 @@
 from flask import Flask, request
 import requests
 import json
+import csv
 
 app = Flask(__name__)
 
@@ -10,6 +11,9 @@ distanceMatrix_root = 'https://maps.googleapis.com/maps/api/distancematrix/json?
 geocode_root = 'https://maps.googleapis.com/maps/api/geocode/json?'
 
 users = []
+
+Airports = {'ATL': 'Hartsfield–Jackson Atlanta International Airport, Atlanta, GA', 'LAX': 'Los Angeles International Airport, Los Angeles, CA', 'ORD': "O'Hare International Airport, Chicago, IL", 'DFW': 'Dallas/Fort Worth International Airport, Dallas/Fort Worth, TX', 'JFK': 'John F. Kennedy International Airport, New York, NY', 'DEN': 'Denver International Airport, Denver, CO', 'SFO': 'San Francisco International Airport, San Francisco, CA', 'LAS': 'McCarran International Airport, Las Vegas, NV', 'SEA': 'Seattle–Tacoma International Airport, Seattle/Tacoma, WA', 'CLT': 'Charlotte Douglas International Airport, Charlotte, NC', 'PHX': 'Phoenix Sky Harbor International Airport, Phoenix, AZ', 'MIA': 'Miami International Airport, Miami, FL', 'MCO': 'Orlando International Airport, Orlando, FL', 'IAH': 'George Bush Intercontinental Airport, Houston, TX', 'EWR': 'Newark Liberty International Airport, Newark/New Jersey, NJ', 'MSP': 'Minneapolis–Saint Paul International Airport, Minneapolis/St. Paul, MN', 'BOS': 'Logan International Airport, Boston, MA', 'DTW': 'Detroit Metropolitan Airport, Detroit, MI', 'PHL': 'Philadelphia International Airport, Philadelphia, PA', 'LGA': 'LaGuardia Airport, New York, NY', 'FLL': 'Fort Lauderdale–Hollywood International Airport, Fort Lauderdale/Miami, FL', 'BWI': 'Baltimore–Washington International Airport, Baltimore/Washington, D.C., MD', 'DCA': 'Ronald Reagan Washington National Airport, Washington, D.C., VA', 'SLC': 'Salt Lake City International Airport, Salt Lake City, UT', 'MDW': 'Midway International Airport, Chicago, IL', 'IAD': 'Washington Dulles International Airport, Washington, D.C., VA', 'SAN': 'San Diego International Airport, San Diego, CA', 'HNL': 'Daniel K. Inouye International Airport, Honolulu, HI', 'TPA': 'Tampa International Airport, Tampa, FL', 'PDX': 'Portland International Airport, Portland, OR'}
+
 
 @app.route('/info', methods = ['POST'])
 def storeInfo():
@@ -60,9 +64,6 @@ class user:
         self.address = origin
 
 
-
-
-
 def getAverageTravelTime(origin, destination, transport):
     ##replace whitespace with '+' signs
     origin = origin.replace(' ', '+')
@@ -87,6 +88,14 @@ def getAverageTravelTime(origin, destination, transport):
             return round(duration / (60.0),2)
 
 
-print(getAverageTravelTime('81 Bay State, Boston, MA', '726 Comm Ave, Boston, MA', 'walking'))
+# def translateAirportCode():
+#
+#     fileReader = csv.reader(open("Workbook2.csv"), delimiter = ",")
+#     #header = fileReader.next()
+#     d = {}
+#     for Airports, Code, City, State in fileReader:
+#         d[Code] = Airports + ', ' + City + ', ' + State
+#     return d
 
+#print(getAverageTravelTime('81 Bay State, Boston, MA', '726 Comm Ave, Boston, MA', 'walking'))
 
