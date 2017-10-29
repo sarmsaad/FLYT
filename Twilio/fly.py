@@ -1,4 +1,3 @@
-import requests
 from redis import Redis
 from rq_scheduler import Scheduler
 
@@ -7,15 +6,14 @@ from datetime import datetime
 
 #intialize the server
 redis_server = Redis()
-redis_server2 = Redis()
 
 #intiliaze the scheduler
 scheduler = Scheduler(connection=redis_server)
-scheduler2 = Scheduler(connection=redis_server2)
 
 client = TwilioRestClient()
 
 sid='ACd3d6e4fed0307c74bd8db2d07d9f4e3b'
+
 
 def add_to_queue(person):
     #send a message to thank the user for subscribing
@@ -27,30 +25,17 @@ def add_to_queue(person):
 
     if time_to_notify != None:
         #append a phone number with the specific time
-        scheduler.enqueue_at(time_to_notify, notify_number, person.phone)
+        scheduler.enqueue_at(time_to_notify, notify_number, person, "please leave in an hour from now")
+        scheduler.enqueue_at(time_to_notify, notify_number, person, "please leave in half an hour")
+        scheduler.enqueue_at(time_to_notify, notify_number, person, "leave nooooow")
         print("here")
     else:
         print("something went wrong")
 
-def notify_number(person):
+def notify_number(person, msg):
     #send the message 5 before leaving
-    client.messages.create(to=person.phone, messaging_service_sid=sid, body="please leave an hour from now")
+    client.messages.create(to=person.phone, messaging_service_sid=sid, body=msg)
 
-    ##add 2 minutes so it would send a text 30 min before leaving
-    flightTime = delete(person.flightTime)
-    person.flightTime = flightTime
-    redis_server2.set(person.phone, flightTime)
-
-    time_to_notify = person.estimateTime #- (find a way to delete two minutes)
-
-    if time_to_notify != None:
-        scheduler2.enqueue_at(time_to_notify, notify_number2, person.phone)
-        print("went here")
-    else:
-        print("lmao")
-
-def notify_number2(person):
-    client.messages.create(to=person.phone, messaging_service_sid=sid, body="please")
 
 
 
