@@ -51,7 +51,7 @@ class user:
         self.address = address
         self.flight = flightNumber
         self.time = flightTime
-        self.aiport = airport
+        self.airport = Airports[airport]
         self.transport = transport
         self.checkin = checkin
         ##this is the most important variable
