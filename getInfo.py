@@ -1,5 +1,6 @@
 import pytz
 from flask import Flask, request, jsonify
+from tasks import blah
 import requests
 import csv
 
@@ -135,6 +136,7 @@ def getAverageTravelTime(origin, destination, transport):
             return round(duration / (60.0), 2)
 
 
+
 def add_to_queue(person):
     # send a message to thank the user for subscribing
     # client.messages.create(to=person.phone,
@@ -149,20 +151,26 @@ def add_to_queue(person):
 
     if time_to_notify != None:
         # append a phone number with the specific time
-        scheduler.enqueue_at(time_to_notify, lambda x: print("hello"), person.phone, "please leave in an hour from now")
-        # scheduler.enqueue_at(time_to_notify, notify_number, person.phone, "please leave in half an hour")
-        # scheduler.enqueue_at(time_to_notify, call_number, person)
+        scheduler.enqueue_at(time_to_notify, notify_number, person.phone, "please leave in an hour from now")
+        scheduler.enqueue_at(time_to_notify, notify_number, person.phone, "please leave in half an hour")
+        scheduler.enqueue_at(time_to_notify, call_number, person)
         print("here")
     else:
         print("something went wrong")
 
 
 
+def notify_number(number, msg):
+    client.message.create(to=number,
+                          from_ = TNUM,
+                          body = msg)
 
 
 
-# def call_number(person):
-#     client.api.account.calls.create(to=person.phone, from=TNUM, url = "https://ear-tube-znk.c9users.io/say/say?words={}".format("Leave now"))
+def call_number(person):
+    client.api.account.calls.create(to=person.phone,
+                                    from_ =TNUM,
+                                    url = "https://ear-tube-znk.c9users.io/say/say?words={}".format("Leave now"))
 
 
 
