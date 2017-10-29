@@ -1,0 +1,67 @@
+    body{
+    -webkit-animation-name: colorchange; /* Safari 4.0 - 8.0 */
+    -webkit-animation: colorchange 50s infinite; /* Chrome and Safari */
+    
+    animation: colorchange 50s infinite;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    margin: 0px 0px 0px 0px;
+    }
+
+    #userInput{
+      background-color: white;
+    }
+
+    .form-row{
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .jumbotron{
+      background: transparent;
+      text-align: center;
+      height: 550px;
+      background-attachment: fixed;
+      background-position: center;
+ 
+    }
+
+    .stuff{
+      background: white;
+      padding: 15px 15px 15px 15px;
+      margin-right: 500px;
+      margin-left: 500px;
+      opacity: 0.8;
+      border-radius: 15px;
+      margin-top: 100px;
+    }
+
+    @keyframes colorchange
+    {
+      0%   {background: #b1dfff;}
+      25%  {background: #5bc4e4;}
+      50%  {background: #196aa2;}
+      75%  {background: #00355d;}
+      100% {background: #01203d;}
+    }
+
+    @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+    {
+      0%   {background: #b1dfff;}
+      25%  {background: #5bc4e4;}
+      50%  {background: #196aa2;}
+      75%  {background: #00355d;}
+      100% {background: #01203d;}
+    }
+
+    #userInput{
+      background-color: white;
+    }
+
+    #title{
+      background-color: transparent;
+    }

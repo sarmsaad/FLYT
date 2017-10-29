@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Flyte</title>
+	<meta name="viewport" content="width-device-width, initial-scale = 1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script scr="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/jk/bootstrap.min.js"></script>
+
+    <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
+    <link rel='stylesheet' type='text/css' href='style.css'/>
+
+</head>
+<body>
+<div id ="homepage">
+    <div class ="jumbotron" id = "title">
+        <div class  = "stuff">
+            <h1 class="display-3">Flyt</h1>
+            <p class="lead">Fly on time</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#userInput" role="button">Get Started!</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id = "userInput">
+<!--use grid format lmao-->
+    <h1 class = "display-3">Please enter your information below</h1>
+    <form>
+        <!--name form optional-->
+        <div class="form-row">
+            <div class="col-sm-6">
+                <label for = "first-name">First Name</label>
+                <input type="text" class="form-control" name="first-name">
+            </div>
+            <div class="col-sm-6">
+            <label for = "last-name">Last Name</label>
+                <input type="text" class="form-control" name="last-name">
+            </div>
+        </div>
+
+        <!--form for address-->
+         <div class="form-row">
+            <div class="col">
+                <label for = "address">Address of Departure</label>
+                <input type="text" class="form-control" name="address" required>
+            </div>
+        </div>
+
+        <!--form for phone and mode of transportation-->
+        <div class="form-row">
+            <div class="col-sm-6">
+                <label for = "number">Phone Number</label>
+                <input type="text" class="form-control" name="number" required>
+            </div>
+            
+            <div class="col-sm-6">
+	            <label for = "trans">Mode of Transportation</label>
+	               	<select name="trans" class="form-control">
+	                    <option selected>Choose...</option>
+	                    <option>Car</option>
+	                    <option>Walking</option>
+	                    <option>Public Transportation</option>
+	               	</select>
+            </div> 
+
+        </div>
+
+        <!--form for airport, flight id, date departure *required-->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="airport">Airport</label>
+                <select name="airport" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>BOS</option>
+                        <option>SFO</option>
+                        <option>LAX</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="flyid">Flight ID</label>
+              <input type="text" class="form-control" name="flyid" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="departure">Departure Time</label>
+              <input type="datetime-local" class="form-control" name="departure">
+            </div>
+        </div>
+
+        <div class="form-group row" align = "left">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<!--tweeninggg and other animations teehee-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+
+
+</body>
+</html>
